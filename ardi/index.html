@@ -934,7 +934,7 @@ window.NASA_REAL = {"source":"NASA POWER (MERRA-2) daily 2000-2025","regions":{"
       sheet2: 'لم تُراجع بعد: المعلومات قد تكون صحيحة، لكن لم ينظر فيها مهندس. استشر مختصًا قبل التنفيذ.', sheet3: 'تمت مراجعة هذه التوصية بالذات: مراجعة مهندس لتوصية معينة لأرضك. قريبًا.', close: 'إغلاق',
       wx: 'الطقس لـ 5 أيام', scen: 'جرّب ظروفًا', sc_normal: 'عادي', sc_cold: 'برد وصقيع', sc_heat: 'موجة حر', sc_rainy: 'أمطار غزيرة', sc_wind: 'رياح قوية', noWarn: 'لا تحذيرات خلال 5 أيام.',
       wr_frost: 'تحذير صقيع: قد تنزل الحرارة إلى {v}°م بعد {d} يوم. غطِّ النباتات الحساسة إن أمكن.', wr_heat: 'موجة حر: حتى {v}°م. زد الري وتجنب الري وقت الظهر.',
-      wr_wind: 'رياح قوية: نحو {v} م/ث. ثبّت الأغطية والبيوت البلاستيكية.', wr_rain: 'مطر غزير: نحو {v} ملم في يوم. أوقف الري وراقب انجراف التربة.',
+      wr_wind: 'رياح قوية: نحو {v} م/ث. ثبّت الأغطية والبيوت البلاستيكية.', wr_rain: 'مطر غزير: نحو {v} ملم في يوم. أوقف الري وراقب انجراف التربة.', wr_rain_rf: 'مطر غزير: نحو {v} ملم في يوم. راقب انجراف التربة وتصريف المياه في أرضك.', wr_heat_rf: 'موجة حر: حتى {v}°م. قد تتأثر المزروعات. إن توفر ماء فالري التكميلي يفيد.',
       today: 'اليوم', tomorrow: 'غدًا', d: 'بعد {n}',
       irrIrr: 'اسقِ {depth} ملم ({depth} م³ للدونم) {n} مرات هذا الأسبوع، كل {i} أيام تقريبًا.', irrNone: 'لا حاجة للري هذا الأسبوع. المطر والرطوبة المخزّنة تكفيان.',
       irrWhy: 'احتياج المحصول {etc} ملم، ناقص مطر فعّال {rain} ملم، ناقص رطوبة مخزّنة {cr} ملم.',
@@ -1064,7 +1064,7 @@ window.NASA_REAL = {"source":"NASA POWER (MERRA-2) daily 2000-2025","regions":{"
       sheet2: 'Not reviewed yet: the information may be right, but no agronomist has looked at it. Ask a specialist before acting.', sheet3: 'This specific recommendation was reviewed: an agronomist checked one recommendation for your land. Coming soon.', close: 'Close',
       wx: '5-day weather', scen: 'Try conditions', sc_normal: 'Normal', sc_cold: 'Cold snap', sc_heat: 'Heat wave', sc_rainy: 'Heavy rain', sc_wind: 'Strong wind', noWarn: 'No warnings in the next 5 days.',
       wr_frost: 'Frost warning: temperature may drop to {v}°C in {d} days. Cover sensitive plants if you can.', wr_heat: 'Heat wave: up to {v}°C. Irrigate more and avoid midday irrigation.',
-      wr_wind: 'Strong wind: about {v} m/s. Secure covers and greenhouses.', wr_rain: 'Heavy rain: about {v} mm in a day. Pause irrigation and watch for soil wash-off.',
+      wr_wind: 'Strong wind: about {v} m/s. Secure covers and greenhouses.', wr_rain: 'Heavy rain: about {v} mm in a day. Pause irrigation and watch for soil wash-off.', wr_rain_rf: 'Heavy rain: about {v} mm in a day. Watch for soil wash-off and drainage on your land.', wr_heat_rf: 'Heat wave: up to {v}°C. Crops may suffer. Supplemental watering helps if you have water.',
       today: 'Today', tomorrow: 'Tomorrow', d: 'In {n}',
       irrIrr: 'Apply {depth} mm ({depth} m³ per dunum) {n} times this week, about every {i} days.', irrNone: 'No irrigation needed this week. Rain and stored moisture are enough.',
       irrWhy: 'Crop need {etc} mm, minus effective rain {rain} mm, minus stored moisture {cr} mm.',
@@ -1271,7 +1271,7 @@ window.NASA_REAL = {"source":"NASA POWER (MERRA-2) daily 2000-2025","regions":{"
     return t('inDays', { n: w.startK });
   }
   function reason(r) { return t('r_' + r.k, { t: r.t, pct: r.pct, crop: r.crop ? cn(r.crop) : '' }); }
-  function warnText(w) { return t('wr_' + w.type, { v: w.v, d: w.day }); }
+  function warnText(w, f) { var rf = f && f.water === 'rainfed' && (w.type === 'rain' || w.type === 'heat'); return t('wr_' + w.type + (rf ? '_rf' : ''), { v: w.v, d: w.day }); }
   function dayLabel(i) { return i === 0 ? t('today') : i === 1 ? t('tomorrow') : WEEKDAYS[st.lang][dateAt(i).getDay()]; }
   function svgIcon(n) {
     var p = { home: '<path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>', plus: '<path d="M12 5v14M5 12h14"/>', gear: '<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/>', pin: '<path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>', leaf: '<path d="M5 19c0-8 5-14 15-14 0 10-6 15-14 15M5 19l8-8"/>', data: '<path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/>', chat: '<path d="M21 12a8 8 0 0 1-11.5 7.2L4 20l1-4.5A8 8 0 1 1 21 12z"/>' };
@@ -1490,7 +1490,7 @@ window.NASA_REAL = {"source":"NASA POWER (MERRA-2) daily 2000-2025","regions":{"
         body = '<div class="kv"><span class="k">' + esc(t('bestTime')) + '</span><span class="v">' + esc(winText(w)) + '</span><span class="muted small">' + esc(whenText(w)) + '</span></div>';
       }
       var wr = fieldWarn(f), wh = '';
-      if (wr.length && f.crop) wh = '<div class="warnbox ' + (wr[0].type === 'rain' ? 'rain' : wr[0].type === 'wind' ? 'wind' : '') + '">' + esc(warnText(wr[0])) + '</div>';
+      if (wr.length && f.crop) wh = '<div class="warnbox ' + (wr[0].type === 'rain' ? 'rain' : wr[0].type === 'wind' ? 'wind' : '') + '">' + esc(warnText(wr[0], f)) + '</div>';
       h += '<button class="card tap" data-act="open" data-id="' + esc(f.id) + '"><div class="row between"><h3>' + esc(fname(f)) + '</h3><span class="pill water">' + esc(t(f.water)) + '</span></div><div class="muted">' + esc(rn(f.region)) + ' · ' + esc(f.crop ? cn(f.crop) : t('notPlanned')) + (f.area ? ' · ' + esc(areaText(f.area)) : '') + '</div>' + body + wh + '</button>';
     });
     return h + '<button class="btn ghost block" data-act="newfield">+ ' + esc(t('add')) + '</button></main>' + tabsFarmer('home');
@@ -1519,7 +1519,7 @@ window.NASA_REAL = {"source":"NASA POWER (MERRA-2) daily 2000-2025","regions":{"
       if (f.area && ir.mode === 'rainfed' && ir.need > 10) h += '<div style="font-weight:600">' + esc(t('gapLand', { m: fmt(ir.need * f.area) })) + '</div>';
       if (ir.mode === 'irrigated') h += '<p class="muted small" style="margin:0">' + esc(t('irrWhy', { etc: num(ir.etc, 1), rain: num(ir.eff, 1), cr: num(ir.credit, 0) })) + '</p>';
     }
-    if (wr.length && c) h += '<div class="warnbox ' + (wr[0].type === 'rain' ? 'rain' : wr[0].type === 'wind' ? 'wind' : '') + '">' + esc(warnText(wr[0])) + '</div>';
+    if (wr.length && c) h += '<div class="warnbox ' + (wr[0].type === 'rain' ? 'rain' : wr[0].type === 'wind' ? 'wind' : '') + '">' + esc(warnText(wr[0], f)) + '</div>';
     h += '</div>';
     if (c) {
       var hv = harvestOf(f);
@@ -1532,7 +1532,7 @@ window.NASA_REAL = {"source":"NASA POWER (MERRA-2) daily 2000-2025","regions":{"
     h += '<div class="event ' + SCEN + '"><span class="muted small">' + esc(t('evTitle')) + '</span><b>' + esc(t('ev_' + SCEN)) + '</b></div><div class="fc">';
     fc.slice(0, 5).forEach(function (d) { h += '<div><span>' + esc(dayLabel(d.i)) + '</span><small>' + esc(dm(dateAt(d.i))) + '</small><b>' + Math.round(d.tmax) + '°</b><span>' + Math.round(d.tmin) + '°</span><span dir="ltr">' + (d.rain >= 1 ? num(d.rain, 0) + ' mm' : '–') + '</span></div>'; });
     h += '</div>';
-    if (wr.length) wr.forEach(function (w2) { h += '<div class="warnbox ' + (w2.type === 'rain' ? 'rain' : w2.type === 'wind' ? 'wind' : '') + '">' + esc(warnText(w2)) + '</div>'; }); else h += '<p class="muted" style="margin:0">' + esc(t('noWarn')) + '</p>';
+    if (wr.length) wr.forEach(function (w2) { h += '<div class="warnbox ' + (w2.type === 'rain' ? 'rain' : w2.type === 'wind' ? 'wind' : '') + '">' + esc(warnText(w2, f)) + '</div>'; }); else h += '<p class="muted" style="margin:0">' + esc(t('noWarn')) + '</p>';
     h += '</div>';
     var hist = (f.history || []).filter(Boolean).map(function (x) { return x === 'fallow' ? t('fallow') : cn(x); }).join(sep()) || t('unknownHist');
     h += '<div class="card"><h3>' + esc(t('landInfo')) + '</h3>';
@@ -1691,7 +1691,7 @@ window.NASA_REAL = {"source":"NASA POWER (MERRA-2) daily 2000-2025","regions":{"
   function waMessage() {
     var F = st.fields.filter(function (x) { return x.crop; });
     var all = F.map(function (x) { return { f: x, w: fieldWarn(x) }; }).filter(function (x) { return x.w.length; });
-    if (st.settings.warn && all.length) return t('waMsgWarn', { f: fname(all[0].f), w: warnText(all[0].w[0]) });
+    if (st.settings.warn && all.length) return t('waMsgWarn', { f: fname(all[0].f), w: warnText(all[0].w[0], all[0].f) });
     var g = F.filter(function (x) { return x.sowDate; })[0];
     if (st.settings.irr && g) return t('waMsgIrr', { f: fname(g), i: irrText(fieldIrr(g)) });
     var p = F.filter(function (x) { return !x.sowDate; })[0];
@@ -1800,7 +1800,7 @@ window.NASA_REAL = {"source":"NASA POWER (MERRA-2) daily 2000-2025","regions":{"
     },
     weather_alerts: function (a) {
       var rid = E.REGION[a.region] ? a.region : myRegion(), f = myField(), wr = E.warnings(E.forecast(rid, SCEN, TODAY, 7), f && E.CROP[f.crop]), r = E.REGION[rid], m = TODAY.getMonth();
-      return { region: rn(rid), alerts: wr.map(warnText), normal_days_over_35C_pct: r.pHeat ? r.pHeat[m] : null, normal_nights_under_3C_pct: r.pCold ? r.pCold[m] : null };
+      return { region: rn(rid), alerts: wr.map(function (x) { return warnText(x, f); }), normal_days_over_35C_pct: r.pHeat ? r.pHeat[m] : null, normal_nights_under_3C_pct: r.pCold ? r.pCold[m] : null };
     },
     next_crop: function (a) {
       var prev = cropFromText(a.previous_crop) || a.previous_crop, f = myField(), rid = E.REGION[a.region] ? a.region : (regionFromText(a.region || '') || myRegion());
