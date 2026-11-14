@@ -4,7 +4,7 @@
 
 Built by **Team Aliens 👽** for the **2026 NASA Space Apps Challenge** under the challenge **"Field Shift: Adapting Farms with NASA Data."**
 
-> ⚠️ Ardi supports a farmer's decisions. It does not replace their experience or a local agronomist.
+>  Ardi supports a farmer's decisions. It does not replace their experience or a local agronomist.
 
 ---
 
