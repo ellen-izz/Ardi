@@ -821,8 +821,10 @@ window.NASA_REAL = {"source":"NASA POWER (MERRA-2) daily 2000-2025","regions":{"
     var g = rng(20261114), out = [], wRegion = [0.14, 0.18, 0.2, 0.2, 0.18, 0.1];
     var wCrop = { wheat: 0.22, barley: 0.1, lentil: 0.1, chickpea: 0.08, faba: 0.06, potato: 0.14, tomato: 0.18, cucumber: 0.12 };
     function pick(pairs) { var x = g(), a = 0; for (var i = 0; i < pairs.length; i++) { a += pairs[i][1]; if (x <= a) return pairs[i][0]; } return pairs[pairs.length - 1][0]; }
-    for (var i = 0; i < 420; i++) {
-      var rid = pick(REGIONS.filter(function (r) { return r.country === 'ps'; }).map(function (r, j) { return [r.id, wRegion[j] != null ? wRegion[j] : 0.03]; }));
+    var wById = { jenin: 0.10, nablus: 0.11, ramallah: 0.12, hebron: 0.13, jericho: 0.12, gaza: 0.07, tubas: 0.07, tulkarm: 0.07, qalqilya: 0.06, salfit: 0.05, jerusalem: 0.05, bethlehem: 0.05 };
+    var psPairs = REGIONS.filter(function (r) { return r.country === 'ps'; }).map(function (r) { return [r.id, wById[r.id] != null ? wById[r.id] : 0.02]; });
+    for (var i = 0; i < 900; i++) {
+      var rid = pick(psPairs);
       var cid = pick(CROPS.map(function (c) { return [c.id, wCrop[c.id]]; }));
       if (rid === 'jericho' && (cid === 'wheat' || cid === 'lentil')) cid = g() < 0.6 ? 'tomato' : 'cucumber';
       var issues = [];
