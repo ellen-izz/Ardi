@@ -2,7 +2,7 @@
 
 **Ardi** ("my land" in Arabic) is a decision-support web app that helps farmers in the Levant and nearby regions pick better crop rotations, know when to sow, and plan how much to water. Its recommendations come from NASA Earth observation data.
 
-Built for the **2026 NASA Space Apps Challenge** under the challenge **"Field Shift: Adapting Farms with NASA Data."**
+Built by **Team Aliens 👽** for the **2026 NASA Space Apps Challenge** under the challenge **"Field Shift: Adapting Farms with NASA Data."**
 
 > ⚠️ Ardi supports a farmer's decisions. It does not replace their experience or a local agronomist.
 
@@ -54,8 +54,8 @@ Every result has a **"What we do not know"** section:
 Ardi is a single, self-contained HTML file with no build step and no server.
 
 ```bash
-git clone https://github.com/<your-username>/<repo-name>.git
-cd <repo-name>
+git clone https://github.com/ellen-izz/Ardi.git
+cd Ardi
 ```
 
 Then open `ardi/index.html` in a modern browser (Chrome recommended for voice input).
@@ -83,6 +83,10 @@ README.md
 ## Challenge
 
 [NASA Space Apps Challenge 2026: Field Shift: Adapting Farms with NASA Data](https://www.spaceappschallenge.org/)
+
+## Team
+
+**Aliens 👽**, 2026 NASA Space Apps Challenge
 
 ## Acknowledgements
 
