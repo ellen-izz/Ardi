@@ -4,7 +4,7 @@
 
 Built by **Team Aliens 👽** for the **2026 NASA Space Apps Challenge** under the challenge **"Field Shift: Adapting Farms with NASA Data."**
 
-> ⚠️ Ardi supports a farmer's decisions. It does not replace their experience or a local agronomist.
+>  Ardi supports a farmer's decisions. It does not replace their experience or a local agronomist.
 
 ---
 
@@ -93,3 +93,10 @@ README.md
 - **NASA POWER** project (NASA Langley Research Center) for open climate data
 - **FAO** Irrigation and Drainage Paper 56 for the evapotranspiration method
 - The farmers whose experience inspired this tool
+## Demo video
+
+
+https://github.com/user-attachments/assets/c3db1193-4d7c-4e21-9765-50e7f544abc6
+
+
+
